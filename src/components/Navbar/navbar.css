@@ -1,0 +1,113 @@
+.nav-container {
+    background-color: rgb(255, 255, 255);
+    width: 100vw;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding:  20px; */
+    position: relative;
+}
+
+.logo-container {
+    /* custom pading nav page space add */
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+.pages-container a {
+    margin: 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-size: 18px;
+    /* custom pading nav page space add */
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.pages-container a:hover {
+    color: #8F3E97;
+}
+
+/* Menu icon */
+.menu-icon {
+    display: none;
+    font-size: 35px;
+    cursor: pointer;
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    z-index: 998;
+}
+
+/* Mobile menu panel */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 200px;
+    height: 100vh;
+    background: linear-gradient(135deg, #8F3E97 0%, #6B46C1 100%);
+    display: flex;
+    flex-direction: column;
+    padding: 100px 20px 20px 20px;
+    gap: 18px;
+    transition: right 0.4s ease-in-out;
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
+    border-top-left-radius: 1px;
+    border-bottom-left-radius: 1px;
+    z-index: 999;
+}
+
+.mobile-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    padding-left: 25px;
+}
+
+/* .mobile-menu a:hover {
+    color: #8F3E97;
+} */
+
+.mobile-menu.open {
+    right: 0;
+}
+
+@media screen and (max-width: 1435px) {
+    .pages-container {
+        display: none;
+    }
+
+    .menu-icon {
+        display: block;
+        color: #8F3E97;
+    }
+
+    .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 250px;
+        height: 100vh;
+        background: linear-gradient(135deg, #8F3E97 0%, #6B46C1 100%);
+        display: flex;
+        flex-direction: column;
+        padding: 100px 20px 20px 20px;
+        gap: 18px;
+        transition: right 0.4s ease-in-out;
+        box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
+        border-top-left-radius: 1px;
+        border-bottom-left-radius: 1px;
+        z-index: 999;
+    }
+}
+
+
