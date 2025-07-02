@@ -53,6 +53,7 @@ export default function Navbar() {
         <Link to="/my_profile" onClick={() => setMenuOpen(false)}><PersonIcon />My Profile</Link>
         
         <Link to="/login" onClick={() => setMenuOpen(false)}><PersonIcon />Login</Link>
+        <Link to="/register" onClick={() => setMenuOpen(false)}><PersonIcon />Register</Link>
         
       </div>
     </div>

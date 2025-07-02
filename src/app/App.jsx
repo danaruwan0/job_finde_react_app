@@ -8,20 +8,21 @@ import JobSearch from '../pages/Job_search/JobSearch';
 import MyJobpage from '../pages/My_Jobpage/MyJobpage';
 import MyProfile from '../pages/My_profile/MyProfile';
 import Login from '../pages/Login/Login';
+import Register from '../pages/Register/Register';
 
 function AppContent() {
   const location = useLocation();
 
-  // Check if current route is login
-  const isLoginPage = location.pathname === '/login';
+  // Check if current route is login or register
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
 
   return (
     <div>
       {/* Optional background animation */}
       {/* <BubbleCanvas /> */}
 
-      {/* Show Navbar only if not on login page */}
-      {!isLoginPage && <Navbar />}
+      {/* Show Navbar only if not on login or register page */}
+      {!isAuthPage && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Navigate to="/home" replace />} />
@@ -31,6 +32,7 @@ function AppContent() {
         <Route path="/my_job_page" element={<MyJobpage />} />
         <Route path="/my_profile" element={<MyProfile />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );
