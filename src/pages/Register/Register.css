@@ -171,6 +171,63 @@
   color: #F44336;
 }
 
+
+
+/* Role selection styles */
+.role-selection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.role-button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.role-button:hover {
+    border-color: #6e8efb;
+}
+
+.role-button.active {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    border-color: transparent;
+}
+
+/* Error styles */
+.error-message {
+    color: #F44336;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+.form-input.error {
+    border-color: #F44336;
+}
+
+/* Password match indicator */
+.password-match {
+    font-size: 12px;
+    margin-top: 4px;
+    height: 16px;
+}
+
+.password-match.valid {
+    color: #4CAF50;
+}
+
+.password-match.invalid {
+    color: #F44336;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .register-container {

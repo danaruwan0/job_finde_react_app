@@ -6,22 +6,45 @@ import Button from '../../components/Button/Button';
 import Image from '../../components/Image/Image';
 import Ils_one from '../../assets/ils-1.png';
 import Logo from '../../components/Logo/Logo';
-import { useNavigate } from 'react-router-dom'; // ✅ Add this
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('jobSeeker');
+  const [errors, setErrors] = useState({});
 
-  const navigate = useNavigate(); // ✅ Add this
+  const navigate = useNavigate();
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!email) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    
+    if (!password) {
+      newErrors.password = 'Password is required';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('Login clicked with:', email, password);
-    // Add your authentication logic here
+    
+    if (validateForm()) {
+      console.log('Login clicked with:', { email, password, role });
+      // Add your authentication logic here
+      // You might want to include the role in your authentication request
+    }
   };
 
   const goToRegister = () => {
-    navigate('/register'); // ✅ Navigate to Register page
+    navigate('/register');
   };
 
   return (
@@ -37,7 +60,8 @@ export default function Login() {
             className="login-image"
           />
           <h2 className="welcome-text">Welcome Back!</h2>
-          <p className="welcome-subtext">Please login to your account</p>
+          <p className="welcome-subtext">Login as {role === 'jobSeeker' ? 'Job Seeker' : 
+                                        role === 'employer' ? 'Employer' : 'Trainer'}</p>
         </div>
 
         {/* Form side */}
@@ -46,9 +70,36 @@ export default function Login() {
 
           <form onSubmit={handleLogin}>
             <div className="form-group">
+              <Text className="form-label" text="I am a" />
+              <div className="role-selection">
+                <button
+                  type="button"
+                  className={`role-button ${role === 'jobSeeker' ? 'active' : ''}`}
+                  onClick={() => setRole('jobSeeker')}
+                >
+                  Job Seeker
+                </button>
+                <button
+                  type="button"
+                  className={`role-button ${role === 'employer' ? 'active' : ''}`}
+                  onClick={() => setRole('employer')}
+                >
+                  Employer
+                </button>
+                <button
+                  type="button"
+                  className={`role-button ${role === 'trainer' ? 'active' : ''}`}
+                  onClick={() => setRole('trainer')}
+                >
+                  Trainer
+                </button>
+              </div>
+            </div>
+
+            <div className="form-group">
               <Text className="form-label" text="Email Address" />
               <Input
-                className="form-input"
+                className={`form-input ${errors.email ? 'error' : ''}`}
                 id="email"
                 type="email"
                 value={email}
@@ -56,12 +107,13 @@ export default function Login() {
                 placeholder="Enter your email"
                 required
               />
+              {errors.email && <span className="error-message">{errors.email}</span>}
             </div>
 
             <div className="form-group">
               <Text className="form-label" text="Password" />
               <Input
-                className="form-input"
+                className={`form-input ${errors.password ? 'error' : ''}`}
                 id="password"
                 type="password"
                 value={password}
@@ -69,6 +121,7 @@ export default function Login() {
                 placeholder="Enter your password"
                 required
               />
+              {errors.password && <span className="error-message">{errors.password}</span>}
             </div>
 
             <div className="form-options">

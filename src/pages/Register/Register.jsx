@@ -7,27 +7,65 @@ import Image from '../../components/Image/Image';
 import Ils_one from '../../assets/ils-1.png';
 import Ils_tow from '../../assets/ils-2.png';
 import Logo from '../../components/Logo/Logo';
-import { useNavigate } from 'react-router-dom'; // ✅ added this
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [role, setRole] = useState('jobSeeker');
+    const [errors, setErrors] = useState({});
+    const [passwordMatch, setPasswordMatch] = useState(null);
 
-    const navigate = useNavigate(); // ✅ added this
+    const navigate = useNavigate();
+
+    const validateForm = () => {
+        const newErrors = {};
+        
+        // Email validation
+        if (!email) {
+            newErrors.email = 'Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            newErrors.email = 'Please enter a valid email';
+        }
+        
+        // Password validation
+        if (!password) {
+            newErrors.password = 'Password is required';
+        } else if (password.length < 8) {
+            newErrors.password = 'Password must be at least 8 characters';
+        }
+        
+        // Confirm password validation
+        if (password !== confirmPassword) {
+            newErrors.confirmPassword = 'Passwords do not match';
+        }
+        
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        setPasswordMatch(e.target.value === confirmPassword && confirmPassword !== '');
+    };
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
+        setPasswordMatch(e.target.value === password && password !== '');
+    };
 
     const handleRegister = (e) => {
         e.preventDefault();
-        if (password !== confirmPassword) {
-            alert("Passwords don't match!");
-            return;
+        
+        if (validateForm()) {
+            console.log('Register clicked with:', { email, password, role });
+            // Add your registration logic here
         }
-        console.log('Register clicked with:', { email, password });
-        // Add your registration logic here
     };
 
     const goToLogin = () => {
-        navigate('/login'); // ✅ navigate to login
+        navigate('/login');
     };
 
     return (
@@ -42,7 +80,8 @@ export default function Register() {
                         className="register-image"
                     />
                     <h2 className="welcome-text">Create Account!</h2>
-                    <p className="welcome-subtext">Join our community</p>
+                    <p className="welcome-subtext">Join our community as a {role === 'jobSeeker' ? 'Job Seeker' : 
+                                                  role === 'employer' ? 'Employer' : 'Trainer'}</p>
                 </div>
 
                 {/* Form side */}
@@ -51,9 +90,36 @@ export default function Register() {
 
                     <form onSubmit={handleRegister}>
                         <div className="form-group">
+                            <Text className="form-label" text="I am a" />
+                            <div className="role-selection">
+                                <button
+                                    type="button"
+                                    className={`role-button ${role === 'jobSeeker' ? 'active' : ''}`}
+                                    onClick={() => setRole('jobSeeker')}
+                                >
+                                    Job Seeker
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`role-button ${role === 'employer' ? 'active' : ''}`}
+                                    onClick={() => setRole('employer')}
+                                >
+                                    Employer
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`role-button ${role === 'trainer' ? 'active' : ''}`}
+                                    onClick={() => setRole('trainer')}
+                                >
+                                    Trainer
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="form-group">
                             <Text className="form-label" text="Email Address" />
                             <Input
-                                className="form-input"
+                                className={`form-input ${errors.email ? 'error' : ''}`}
                                 id="email"
                                 type="email"
                                 value={email}
@@ -61,32 +127,39 @@ export default function Register() {
                                 placeholder="Enter your email"
                                 required
                             />
+                            {errors.email && <span className="error-message">{errors.email}</span>}
                         </div>
 
                         <div className="form-group">
                             <Text className="form-label" text="Password" />
                             <Input
-                                className="form-input"
+                                className={`form-input ${errors.password ? 'error' : ''}`}
                                 id="password"
                                 type="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Create password"
+                                onChange={handlePasswordChange}
+                                placeholder="Create password (min 8 characters)"
                                 required
                             />
+                            {errors.password && <span className="error-message">{errors.password}</span>}
                         </div>
 
                         <div className="form-group">
                             <Text className="form-label" text="Confirm Password" />
                             <Input
-                                className="form-input"
+                                className={`form-input ${errors.confirmPassword ? 'error' : ''}`}
                                 id="confirmPassword"
                                 type="password"
                                 value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                onChange={handleConfirmPasswordChange}
                                 placeholder="Confirm your password"
                                 required
                             />
+                            {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
+                            <div className={`password-match ${passwordMatch === true ? 'valid' : passwordMatch === false ? 'invalid' : ''}`}>
+                                {passwordMatch === true && 'Passwords match!'}
+                                {passwordMatch === false && 'Passwords do not match'}
+                            </div>
                         </div>
 
                         <div className="form-options">
