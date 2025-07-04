@@ -1,0 +1,58 @@
+/* RoleSelector.css */
+
+.role-selection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.role-button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.role-button:hover {
+    border-color: #6e8efb;
+    color: #6e8efb;
+}
+
+/* .role-button.active {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    border-color: transparent;
+} */
+
+.role-button[aria-pressed="true"] {
+    /* Same styles as .active */
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+
+}
+
+.role-button:focus {
+    outline: 2px solid #6e8efb;
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .role-selection {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .role-button {
+        width: 100%;
+    }
+}

@@ -7,39 +7,68 @@ import Image from '../../components/Image/Image';
 import Ils_one from '../../assets/ils-1.png';
 import Logo from '../../components/Logo/Logo';
 import { useNavigate } from 'react-router-dom';
+import RoleSelector from '../../components/RoleSelector/RoleSelector';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState('jobSeeker');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    role: 'jobSeeker',
+    rememberMe: false
+  });
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const validateForm = () => {
     const newErrors = {};
     
-    if (!email) {
+    if (!formData.email) {
       newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email';
     }
     
-    if (!password) {
+    if (!formData.password) {
       newErrors.password = 'Password is required';
+    } else if (formData.password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters';
     }
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleLogin = (e) => {
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleRoleChange = (newRole) => {
+    setFormData(prev => ({ ...prev, role: newRole }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (validateForm()) {
-      console.log('Login clicked with:', { email, password, role });
+    if (!validateForm()) return;
+    
+    setIsLoading(true);
+    try {
       // Add your authentication logic here
-      // You might want to include the role in your authentication request
+      console.log('Login submitted:', formData);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Navigate on success
+      // navigate('/dashboard');
+    } catch (error) {
+      setErrors({ server: error.message });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -50,7 +79,6 @@ export default function Login() {
   return (
     <div className="login-page">
       <div className="login-container">
-
         {/* Illustration side */}
         <div className="login-illustration">
           <Logo />
@@ -60,40 +88,29 @@ export default function Login() {
             className="login-image"
           />
           <h2 className="welcome-text">Welcome Back!</h2>
-          <p className="welcome-subtext">Login as {role === 'jobSeeker' ? 'Job Seeker' : 
-                                        role === 'employer' ? 'Employer' : 'Trainer'}</p>
+          <p className="welcome-subtext">
+            Login as {formData.role === 'jobSeeker' ? 'Job Seeker' : 
+                   formData.role === 'employer' ? 'Employer' : 'Trainer'}
+          </p>
         </div>
 
         {/* Form side */}
         <div className="login-form">
           <h1 className="form-title">Login</h1>
 
-          <form onSubmit={handleLogin}>
+          {errors.server && (
+            <div className="server-error">
+              {errors.server}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <Text className="form-label" text="I am a" />
-              <div className="role-selection">
-                <button
-                  type="button"
-                  className={`role-button ${role === 'jobSeeker' ? 'active' : ''}`}
-                  onClick={() => setRole('jobSeeker')}
-                >
-                  Job Seeker
-                </button>
-                <button
-                  type="button"
-                  className={`role-button ${role === 'employer' ? 'active' : ''}`}
-                  onClick={() => setRole('employer')}
-                >
-                  Employer
-                </button>
-                <button
-                  type="button"
-                  className={`role-button ${role === 'trainer' ? 'active' : ''}`}
-                  onClick={() => setRole('trainer')}
-                >
-                  Trainer
-                </button>
-              </div>
+              <RoleSelector 
+                selectedRole={formData.role}
+                onRoleChange={handleRoleChange}
+              />
             </div>
 
             <div className="form-group">
@@ -101,9 +118,10 @@ export default function Login() {
               <Input
                 className={`form-input ${errors.email ? 'error' : ''}`}
                 id="email"
+                name="email"
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Enter your email"
                 required
               />
@@ -115,9 +133,10 @@ export default function Login() {
               <Input
                 className={`form-input ${errors.password ? 'error' : ''}`}
                 id="password"
+                name="password"
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formData.password}
+                onChange={handleChange}
                 placeholder="Enter your password"
                 required
               />
@@ -126,7 +145,13 @@ export default function Login() {
 
             <div className="form-options">
               <label className="remember-me">
-                <input type="checkbox" /> Remember me
+                <input 
+                  type="checkbox" 
+                  name="rememberMe"
+                  checked={formData.rememberMe}
+                  onChange={handleChange}
+                /> 
+                Remember me
               </label>
               <a href="#forgot" className="forgot-password">Forgot password?</a>
             </div>
@@ -134,7 +159,8 @@ export default function Login() {
             <Button
               className="login-button"
               type="submit"
-              text="Login Now"
+              text={isLoading ? 'Logging in...' : 'Login Now'}
+              disabled={isLoading}
             />
 
             <p className="register-text">
