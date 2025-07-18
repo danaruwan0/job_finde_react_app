@@ -42,14 +42,16 @@ export default function Navbar() {
         <Logo />
       </div>
 
-      
-
       <div className='pages-container'>
+
         <Link to="/home">Home</Link>
         <Link to="/employers">Employers</Link>
         <Link to="/job_search">Job Search</Link>
-
         <Link to="/my_profile">My Profile</Link>
+
+        <Link to="/uploade_course">Upload Course</Link>
+        <Link to="/post_jobs">Post Job</Link>
+        <Link to="/admin_panel">Admin Panel</Link>
 
       </div>
 
@@ -59,15 +61,23 @@ export default function Navbar() {
 
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`} ref={menuRef}>
 
+        <Text
+          text={"Menu List"}
+          className={"MenuListText"}
+        />
+
         <Link to="/home" onClick={() => setMenuOpen(false)}><HomeIcon />Home</Link>
         <Link to="/employers" onClick={() => setMenuOpen(false)}><BusinessCenterIcon />Employers</Link>
         <Link to="/job_search" onClick={() => setMenuOpen(false)}><SearchIcon />Job Search</Link>
         <Link to="/my_profile" onClick={() => setMenuOpen(false)}><PersonIcon />My Profile</Link>
-        <Link to="/login" onClick={() => setMenuOpen(false)}><LoginIcon />Login</Link>
-        <Link to="/register" onClick={() => setMenuOpen(false)}><AppRegistrationIcon />Register</Link>
         <Link to="/uploade_course" onClick={() => setMenuOpen(false)}><UploadFileIcon />Upload Course</Link>
         <Link to="/post_jobs" onClick={() => setMenuOpen(false)}><PostAddIcon />Post Job</Link>
         <Link to="/admin_panel" onClick={() => setMenuOpen(false)}><AdminPanelSettingsIcon />Admin Panel</Link>
+
+        <div className="auth-buttons">
+          <Link to="/login" onClick={() => setMenuOpen(false)}><LoginIcon />Login</Link>
+          <Link to="/register" onClick={() => setMenuOpen(false)}><AppRegistrationIcon />Register</Link>
+        </div>
 
 
       </div>

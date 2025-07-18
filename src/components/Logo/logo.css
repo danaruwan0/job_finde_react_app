@@ -8,3 +8,9 @@
     color: #222;
   }
   
+
+  @media (max-width: 425px) {
+  .logo {
+    font-size: 30px;
+  }
+}

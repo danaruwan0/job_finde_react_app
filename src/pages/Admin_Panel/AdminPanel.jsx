@@ -1,32 +1,50 @@
 import React from 'react';
 import './adminPanel.css';
 import Footer from '../../components/Footer/Footer';
+import Text from '../../components/Text/Text';
+import Button from '../../components/Button/Button';
 
 export default function AdminPanel() {
-    return (
-        <div>
-            <div className="admin-panel">
-                <h2>Admin Dashboard</h2>
+  return (
+    <div>
+      <div className="admin-panel">
+        <Text className="admin-title" text="Admin Dashboard" />
 
-                <div className="admin-section">
-                    <h3>Manage Users</h3>
-                    <button className="btn">View All Users</button>
-                </div>
-
-                <div className="admin-section">
-                    <h3>Manage Jobs</h3>
-                    <button className="btn">View Job Listings</button>
-                </div>
-
-                <div className="admin-section">
-                    <h3>System Analytics</h3>
-                    <button className="btn">View Reports</button>
-                </div>
-
-
-            </div>
-            <Footer />
+        <div className="admin-section">
+          <Text className="section-title" text="Manage Users" />
+          <Button
+            type="submit"
+            text="View All Users"
+            className="admin-button"
+            id="manage-users"
+            onClick={""}
+          />
         </div>
 
-    );
+        <div className="admin-section">
+          <Text className="section-title" text="Manage Jobs" />
+          <Button
+            type="submit"
+            text="View Job Listings"
+            className="admin-button"
+            id="manage-jobs"
+             onClick={""}
+          />
+        </div>
+
+        <div className="admin-section">
+          <Text className="section-title" text="System Analytics" />
+          <Button
+            type="submit"
+            text="View Reports"
+            className="admin-button"
+            id="view-reports"
+             onClick={""}
+          />
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  );
 }
