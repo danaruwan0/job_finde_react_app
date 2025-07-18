@@ -10,6 +10,11 @@ import MyProfile from '../pages/My_profile/MyProfile';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 
+import UploadCourse from '../pages/Upload_Course/UploadCourse';
+import PostJob from '../pages/Post_job/PostJob';
+import AdminPanel from '../pages/Admin_Panel/AdminPanel';
+
+
 function AppContent() {
   const location = useLocation();
 
@@ -29,10 +34,14 @@ function AppContent() {
         <Route path="/home" element={<Home />} />
         <Route path="/employers" element={<Employers />} />
         <Route path="/job_search" element={<JobSearch />} />
-        <Route path="/my_job_page" element={<MyJobpage />} />
+        
         <Route path="/my_profile" element={<MyProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        <Route path="/admin_panel" element={<AdminPanel />} />
+        <Route path="/post_jobs" element={<PostJob />} />
+        <Route path="/uploade_course" element={<UploadCourse />} />
       </Routes>
     </div>
   );

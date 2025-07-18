@@ -1,10 +1,12 @@
 /* Base styles */
+
+
 .register-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5f7fa;
+  background: linear-gradient(135deg, #d53108, #2575fc, #ec3bba,#1ee005,#6a11cb); 
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
