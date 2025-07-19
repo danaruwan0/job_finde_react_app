@@ -4,15 +4,16 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "r
 import Navbar from '../components/Navbar/Navbar';
 import Home from '../pages/Home/Home';
 import Employers from '../pages/Employers/Employers';
-import JobSearch from '../pages/Job_search/JobSearch';
+import AllJobs from '../pages/All_jobs/AllJobs';
 import MyJobpage from '../pages/My_Jobpage/MyJobpage';
 import MyProfile from '../pages/My_profile/MyProfile';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
-
 import UploadCourse from '../pages/Upload_Course/UploadCourse';
 import PostJob from '../pages/Post_job/PostJob';
 import AdminPanel from '../pages/Admin_Panel/AdminPanel';
+
+
 
 
 function AppContent() {
@@ -33,7 +34,7 @@ function AppContent() {
         <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<Home />} />
         <Route path="/employers" element={<Employers />} />
-        <Route path="/job_search" element={<JobSearch />} />
+        <Route path="/all_jobs" element={<AllJobs />} />
         
         <Route path="/my_profile" element={<MyProfile />} />
         <Route path="/login" element={<Login />} />

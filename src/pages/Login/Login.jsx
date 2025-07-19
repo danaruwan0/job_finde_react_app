@@ -89,6 +89,7 @@ export default function Login() {
           />
           <h2 className="welcome-text">Welcome Back!</h2>
           <p className="welcome-subtext">
+            //add role admin
             Login as {formData.role === 'jobSeeker' ? 'Job Seeker' : 
                    formData.role === 'employer' ? 'Employer' : 'Trainer'}
           </p>

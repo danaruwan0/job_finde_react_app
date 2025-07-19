@@ -46,7 +46,7 @@ export default function Navbar() {
 
         <Link to="/home">Home</Link>
         <Link to="/employers">Employers</Link>
-        <Link to="/job_search">Job Search</Link>
+        <Link to="/all_jobs">All Jobs</Link>
         <Link to="/my_profile">My Profile</Link>
 
         <Link to="/uploade_course">Upload Course</Link>
@@ -68,7 +68,7 @@ export default function Navbar() {
 
         <Link to="/home" onClick={() => setMenuOpen(false)}><HomeIcon />Home</Link>
         <Link to="/employers" onClick={() => setMenuOpen(false)}><BusinessCenterIcon />Employers</Link>
-        <Link to="/job_search" onClick={() => setMenuOpen(false)}><SearchIcon />Job Search</Link>
+        <Link to="/all_jobs" onClick={() => setMenuOpen(false)}><SearchIcon />All Jobs</Link>
         <Link to="/my_profile" onClick={() => setMenuOpen(false)}><PersonIcon />My Profile</Link>
         <Link to="/uploade_course" onClick={() => setMenuOpen(false)}><UploadFileIcon />Upload Course</Link>
         <Link to="/post_jobs" onClick={() => setMenuOpen(false)}><PostAddIcon />Post Job</Link>

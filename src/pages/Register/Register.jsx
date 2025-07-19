@@ -4,7 +4,6 @@ import Text from '../../components/Text/Text';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import Image from '../../components/Image/Image';
-import Ils_one from '../../assets/ils-1.png';
 import Ils_tow from '../../assets/ils-2.png';
 import Logo from '../../components/Logo/Logo';
 import { useNavigate } from 'react-router-dom';
@@ -21,26 +20,23 @@ export default function Register() {
 
     const validateForm = () => {
         const newErrors = {};
-        
-        // Email validation
+
         if (!email) {
             newErrors.email = 'Email is required';
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             newErrors.email = 'Please enter a valid email';
         }
-        
-        // Password validation
+
         if (!password) {
             newErrors.password = 'Password is required';
         } else if (password.length < 8) {
             newErrors.password = 'Password must be at least 8 characters';
         }
-        
-        // Confirm password validation
+
         if (password !== confirmPassword) {
             newErrors.confirmPassword = 'Passwords do not match';
         }
-        
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -57,10 +53,10 @@ export default function Register() {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        
+
         if (validateForm()) {
             console.log('Register clicked with:', { email, password, role });
-            // Add your registration logic here
+            
         }
     };
 
@@ -80,8 +76,11 @@ export default function Register() {
                         className="register-image"
                     />
                     <h2 className="welcome-text">Create Account!</h2>
-                    <p className="welcome-subtext">Join our community as a {role === 'jobSeeker' ? 'Job Seeker' : 
-                                                  role === 'employer' ? 'Employer' : 'Trainer'}</p>
+                    <p className="welcome-subtext">
+                        Join our community as a {role === 'jobSeeker' ? 'Job Seeker' :
+                                                role === 'employer' ? 'Employer' :
+                                                role === 'trainer' ? 'Trainer' : 'Admin'}
+                    </p>
                 </div>
 
                 {/* Form side */}
@@ -112,6 +111,13 @@ export default function Register() {
                                     onClick={() => setRole('trainer')}
                                 >
                                     Trainer
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`role-button ${role === 'admin' ? 'active admin' : ''}`}
+                                    onClick={() => setRole('admin')}
+                                >
+                                    Admin
                                 </button>
                             </div>
                         </div>
@@ -184,5 +190,5 @@ export default function Register() {
                 </div>
             </div>
         </div>
-    )
+    );
 }

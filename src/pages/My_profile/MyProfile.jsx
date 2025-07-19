@@ -8,7 +8,8 @@ export default function MyProfile() {
   return (
     <div>
       <WorkwiseSettings/>
-      {/* footer */}
+      
+      
       <Footer/>
     </div>
   )

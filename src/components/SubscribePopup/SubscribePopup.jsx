@@ -39,7 +39,7 @@ export default function SubscribePopup({ onClose }) {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        {/* ✅ Error Message */}
+       
         {error && <p className="regex-log">{error}</p>}
 
         <button className="confirm-btn" onClick={handleConfirm}>

@@ -61,6 +61,15 @@ export default function PostJob() {
                         onChange={handleChange}
                         required
                     />
+
+                     <Input
+                        className="form-input"
+                        type="text"
+                        name="salary"
+                        placeholder="Salary"
+                        onChange={handleChange}
+                        required
+                    />
                     <Textarea
                         className="form-textarea"
                         name="description"

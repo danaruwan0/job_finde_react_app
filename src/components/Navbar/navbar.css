@@ -117,7 +117,7 @@
         position: fixed;
         top: 0;
         right: -340px;
-        width: 300px;
+        width: 250px;
         height: 100vh;
         background: linear-gradient(135deg, #8F3E97 0%, #6B46C1 100%);
         display: flex;

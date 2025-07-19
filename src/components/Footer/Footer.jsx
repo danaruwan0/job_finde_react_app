@@ -1,5 +1,16 @@
 import React from 'react';
 import './footer.css';
+// import Home from '../pages/Home/Home';
+// import Employers from '../pages/Employers/Employers';
+// import JobSearch from '../pages/Job_search/JobSearch';
+// import MyJobpage from '../pages/My_Jobpage/MyJobpage';
+// import MyProfile from '../pages/My_profile/MyProfile';
+// import Login from '../pages/Login/Login';
+// import Register from '../pages/Register/Register';
+
+// import UploadCourse from '../pages/Upload_Course/UploadCourse';
+// import PostJob from '../pages/Post_job/PostJob';
+// import AdminPanel from '../pages/Admin_Panel/AdminPanel';
 
 export default function Footer() {
   return (
@@ -13,6 +24,7 @@ export default function Footer() {
           <div className="footer-section">
             <h3>Quick Links</h3>
             <ul>
+              {/* //GEGES ADD */}
               <li><a href="/home">Home</a></li>
               <li><a href="/services">Services</a></li>
               <li><a href="/contact">Contact</a></li>

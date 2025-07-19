@@ -7,7 +7,8 @@ const RoleSelector = ({ selectedRole, onRoleChange }) => {
   const roles = [
     { value: 'jobSeeker', label: 'Job Seeker' },
     { value: 'employer', label: 'Employer' },
-    { value: 'trainer', label: 'Trainer' }
+    { value: 'trainer', label: 'Trainer' },
+    { value: 'admin', label: 'Admin' }
   ];
 
   return (
